@@ -35,7 +35,7 @@ export default function LoginScreen({ navigation }) {
         </View>
       </View>
       <View style={styles.footer}>
-        <Pressable style={styles.button}>
+        <Pressable style={styles.button} onPress={() => navigation.navigate('Todo')}>
           <Text style={styles.buttonText}>Login</Text>
         </Pressable>
 
