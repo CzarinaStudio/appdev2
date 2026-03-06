@@ -1,7 +1,17 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, SafeAreaView } from 'react-native';
 
-export default function SignUpScreen() {
+export default function SignUpScreen({ navigation }) {
+  // ✅ Fixed: added missing state variables
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+
+  const handleSignUp = () => {
+    // You can add validation here later
+    console.log('Sign up pressed');
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -44,7 +54,8 @@ export default function SignUpScreen() {
 
       <View style={styles.loginContainer}>
         <Text>Already have an account? </Text>
-        <TouchableOpacity>
+        {/* ✅ Now navigates back to Login screen */}
+        <TouchableOpacity onPress={() => navigation.navigate('Login')}>
           <Text style={styles.link}>Login</Text>
         </TouchableOpacity>
       </View>

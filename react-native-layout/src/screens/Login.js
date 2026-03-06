@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { View, Text, TextInput, StyleSheet, Image, Pressable, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
-export default function LoginScreen() {
+export default function LoginScreen({ navigation }) {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
@@ -38,15 +38,17 @@ export default function LoginScreen() {
         <Pressable style={styles.button}>
           <Text style={styles.buttonText}>Login</Text>
         </Pressable>
-        <View>
+
+        <TouchableOpacity>
           <Text style={styles.link}>Forgot Password?</Text>
-        </View>
+        </TouchableOpacity>
 
         <View style={styles.signupContainer}>
           <Text>Don't have an account? </Text>
-          <View>
+          {/* ✅ Now navigates to SignUp screen */}
+          <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
             <Text style={styles.link}>Sign Up</Text>
-          </View>
+          </TouchableOpacity>
         </View>
       </View>
     </View>
@@ -91,7 +93,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#ccc',
   },
-  // New styles for password row
   passwordContainer: {
     flexDirection: 'row',
     alignItems: 'center',
