@@ -1,8 +1,10 @@
-
-import { View, Text, TextInput, Button, StyleSheet, Image, Pressable } from 'react-native';
+import { useState } from 'react';
+import { View, Text, TextInput, StyleSheet, Image, Pressable, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 export default function LoginScreen() {
+  const [showPassword, setShowPassword] = useState(false);
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -11,16 +13,26 @@ export default function LoginScreen() {
       </View>
       <View style={styles.body}>
         <TextInput
-        style={styles.input}
-        placeholder="Email"
-        keyboardType="email-address"
+          style={styles.input}
+          placeholder="Email"
+          keyboardType="email-address"
         />
 
-        <TextInput
-          style={styles.input}
-          placeholder="Password"
-          secureTextEntry
-        />
+        {/* Password field with eye toggle */}
+        <View style={styles.passwordContainer}>
+          <TextInput
+            style={styles.passwordInput}
+            placeholder="Password"
+            secureTextEntry={!showPassword}
+          />
+          <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
+            <Ionicons
+              name={showPassword ? "eye-outline" : "eye-off-outline"}
+              size={24}
+              color="gray"
+            />
+          </TouchableOpacity>
+        </View>
       </View>
       <View style={styles.footer}>
         <Pressable style={styles.button}>
@@ -69,7 +81,7 @@ const styles = StyleSheet.create({
   image: {
     width: 150,
     height: 150,
-  }, 
+  },
   input: {
     height: 50,
     backgroundColor: '#fff',
@@ -78,6 +90,22 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     borderWidth: 1,
     borderColor: '#ccc',
+  },
+  // New styles for password row
+  passwordContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#fff',
+    paddingHorizontal: 15,
+    borderRadius: 8,
+    marginBottom: 15,
+    borderWidth: 1,
+    borderColor: '#ccc',
+    height: 50,
+  },
+  passwordInput: {
+    flex: 1,
+    height: 50,
   },
   button: {
     height: 50,
@@ -103,4 +131,3 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
 });
-
