@@ -24,6 +24,11 @@ function DetailsScreen({ navigation }) {
       <Text>Details Screen</Text>
 
       <Button
+        title="Go to Details Again"
+        onPress={() => navigation.push('Details')}
+      />
+
+      <Button
         title="Go Back"
         onPress={() => navigation.goBack()}
       />
