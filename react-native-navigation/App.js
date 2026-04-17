@@ -5,25 +5,22 @@ import { View, Text, Button } from 'react-native';
 
 const Stack = createNativeStackNavigator();
 
-function HomeScreen({ navigation, route }) {
-  const updatedMessage = route.params?.message;
-
+function HomeScreen({ navigation }) {
   return (
     <View>
       <Text>Home Screen</Text>
 
-      {updatedMessage && (
-        <Text style={{ marginTop: 10 }}>
-          Message from Details: {updatedMessage}
-        </Text>
-      )}
-
       <Button
-        title="Go to Details"
+        title="Go to Details (Nested Data)"
         onPress={() =>
           navigation.navigate('Details', {
-            userName: 'John Doe',
-            age: 20,
+            user: {
+              name: 'John Doe',
+              info: {
+                age: 20,
+                school: 'React University',
+              },
+            },
           })
         }
       />
@@ -31,16 +28,21 @@ function HomeScreen({ navigation, route }) {
   );
 }
 
-function DetailsScreen({ navigation }) {
+function DetailsScreen({ route, navigation }) {
+  const { user } = route.params;
+
   return (
     <View>
       <Text>Details Screen</Text>
+      <Text>Name: {user.name}</Text>
+      <Text>Age: {user.info.age}</Text>
+      <Text>School: {user.info.school}</Text>
 
       <Button
-        title="Send Message Back"
+        title="Go to Home with Update"
         onPress={() =>
           navigation.navigate('Home', {
-            message: 'Hello from Details Screen',
+            message: 'Coming from nested params',
           })
         }
       />
