@@ -11,27 +11,28 @@ function HomeScreen({ navigation }) {
       <Text>Home Screen</Text>
 
       <Button
-        title="Go to Details"
-        onPress={() => navigation.navigate('Details')}
+        title="Go to Details with Data"
+        onPress={() =>
+          navigation.navigate('Details', {
+            userName: 'John Doe',
+            age: 20,
+          })
+        }
       />
     </View>
   );
 }
 
-function DetailsScreen({ navigation }) {
+function DetailsScreen({ route, navigation }) {
+  const { userName, age } = route.params;
+
   return (
     <View>
       <Text>Details Screen</Text>
+      <Text>Name: {userName}</Text>
+      <Text>Age: {age}</Text>
 
-      <Button
-        title="Go to Details Again"
-        onPress={() => navigation.push('Details')}
-      />
-
-      <Button
-        title="Go Back"
-        onPress={() => navigation.goBack()}
-      />
+      <Button title="Go Back" onPress={() => navigation.goBack()} />
     </View>
   );
 }
