@@ -11,6 +11,11 @@ function HomeScreen({ navigation }) {
       <Text>Home Screen</Text>
 
       <Button
+        title="Go to Details (No Params)"
+        onPress={() => navigation.navigate('Details')}
+      />
+
+      <Button
         title="Go to Details with Data"
         onPress={() =>
           navigation.navigate('Details', {
@@ -24,7 +29,8 @@ function HomeScreen({ navigation }) {
 }
 
 function DetailsScreen({ route, navigation }) {
-  const { userName, age } = route.params;
+  const { userName = 'Guest', age = 'Not Provided' } =
+    route.params || {};
 
   return (
     <View>
@@ -61,6 +67,10 @@ export default function App() {
             headerStyle: { backgroundColor: '#e74c3c' },
             headerTintColor: '#fff',
             headerTitleAlign: 'center',
+          }}
+          initialParams={{
+            userName: 'Default User',
+            age: 18,
           }}
         />
 
