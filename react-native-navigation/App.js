@@ -5,10 +5,18 @@ import { View, Text, Button } from 'react-native';
 
 const Stack = createNativeStackNavigator();
 
-function HomeScreen({ navigation }) {
+function HomeScreen({ navigation, route }) {
+  const updatedMessage = route.params?.message;
+
   return (
     <View>
       <Text>Home Screen</Text>
+
+      {updatedMessage && (
+        <Text style={{ marginTop: 10 }}>
+          Message from Details: {updatedMessage}
+        </Text>
+      )}
 
       <Button
         title="Go to Details"
@@ -23,20 +31,16 @@ function HomeScreen({ navigation }) {
   );
 }
 
-function DetailsScreen({ route, navigation }) {
-  const { userName, age } = route.params;
-
+function DetailsScreen({ navigation }) {
   return (
     <View>
       <Text>Details Screen</Text>
-      <Text>Name: {userName}</Text>
-      <Text>Age: {age}</Text>
 
       <Button
-        title="Change Name"
+        title="Send Message Back"
         onPress={() =>
-          navigation.setParams({
-            userName: 'Updated Name',
+          navigation.navigate('Home', {
+            message: 'Hello from Details Screen',
           })
         }
       />
