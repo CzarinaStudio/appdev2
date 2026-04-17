@@ -18,10 +18,15 @@ function HomeScreen({ navigation }) {
   );
 }
 
-function DetailsScreen() {
+function DetailsScreen({ navigation }) {
   return (
     <View>
       <Text>Details Screen</Text>
+
+      <Button
+        title="Go Back"
+        onPress={() => navigation.goBack()}
+      />
     </View>
   );
 }
