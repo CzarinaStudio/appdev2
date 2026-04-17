@@ -24,9 +24,25 @@ function DetailsScreen() {
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Details" component={DetailsScreen} />
+      <Stack.Navigator
+        initialRouteName="Home"
+        screenOptions={{
+          headerStyle: { backgroundColor: '#4a90e2' },
+          headerTintColor: '#fff',
+          headerTitleAlign: 'center',
+        }}
+      >
+        <Stack.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{ title: 'My Home' }}
+        />
+
+        <Stack.Screen
+          name="Details"
+          component={DetailsScreen}
+          options={{ title: 'Details Page' }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
