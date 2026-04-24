@@ -2,10 +2,11 @@ import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { View, Text, Button } from 'react-native';
+import { RootStackParamList, HomeScreenProps, DetailsScreenProps } from './types';
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
-function HomeScreen({ navigation }) {
+function HomeScreen({ navigation }: HomeScreenProps) {
   return (
     <View>
       <Text>Home Screen</Text>
@@ -28,7 +29,7 @@ function HomeScreen({ navigation }) {
   );
 }
 
-function DetailsScreen({ route, navigation }) {
+function DetailsScreen({ route, navigation }: DetailsScreenProps) {
   const { user } = route.params;
 
   return (
@@ -41,9 +42,7 @@ function DetailsScreen({ route, navigation }) {
       <Button
         title="Go to Home with Update"
         onPress={() =>
-          navigation.navigate('Home', {
-            message: 'Coming from nested params',
-          })
+          navigation.navigate('Home')
         }
       />
 
